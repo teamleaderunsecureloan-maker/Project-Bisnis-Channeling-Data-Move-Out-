@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Bisnis Channeling - Data Inventarisasi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .nav-pills {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px;
+            background: #f8f9fa;
+            flex-wrap: wrap;
+        }
+
+        .nav-pill {
+            padding: 12px 24px;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .nav-pill:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .nav-pill.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: white;
+            border-left: 5px solid #667eea;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateX(10px);
+        }
+
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .card h4 {
+            color: #2a5298;
+            margin: 15px 0 10px 0;
+            font-size: 1.2em;
+        }
+
+        .bullet-point {
+            padding-left: 20px;
+            margin: 10px 0;
+            color: #444;
+            line-height: 1.8;
+        }
+
+        .bullet-point:before {
+            content: "→";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #e17055;
+        }
+
+        .highlight strong {
+            color: #d63031;
+        }
+
+        .flow-diagram {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .flow-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            min-width: 150px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .flow-box:hover {
+            transform: scale(1.1);
+        }
+
+        .flow-arrow {
+            font-size: 2em;
+            color: #667eea;
+        }
+
+        .team-section {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .team-card {
+            flex: 1;
+            min-width: 250px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .team-card h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .challenge-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .challenge-box strong {
+            color: #856404;
+        }
+
+        .output-box {
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .output-box strong {
+            color: #155724;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .nav-pill {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏦 Project Bisnis Channeling</h1>
+            <p>Inventarisasi Data Move Out April - Now</p>
+        </div>
+
+        <div class="nav-pills">
+            <button class="nav-pill active" onclick="showSection(0)">Overview</button>
+            <button class="nav-pill" onclick="showSection(1)">Tim & Tanggung Jawab</button>
+            <button class="nav-pill" onclick="showSection(2)">Populasi Data Loan</button>
+            <button class="nav-pill" onclick="showSection(3)">Data Move Out</button>
+            <button class="nav-pill" onclick="showSection(4)">Konfirmasi Unit Bisnis</button>
+            <button class="nav-pill" onclick="showSection(5)">Finalisasi</button>
+        </div>
+
+        <div class="content">
+            <!-- Section 0: Overview -->
+            <div class="section active">
+                <div class="card">
+                    <h3>🎯 Tujuan Project</h3>
+                    <p style="line-height: 1.8; margin: 15px 0;">Melakukan inventarisasi data untuk mendukung <strong>Project Bisnis Channeling</strong> dengan membangun baseline database yang solid, valid, dan dapat dipertanggungjawabkan untuk Pilot Project.</p>
+                </div>
+
+                <div class="highlight">
+                    <strong>⚠️ Prinsip Utama:</strong> Data yang disajikan harus bersifat <strong>PROVEN, AKURAT, dan DAPAT DIPERTANGGUNGJAWABKAN</strong>
+                </div>
+
+                <div class="card">
+                    <h3>📊 Konteks Bisnis</h3>
+                    <div class="bullet-point">Data berkaitan dengan proses kemitraan (hubungan dengan Taspen)</div>
+                    <div class="bullet-point">Memerlukan kapabilitas MIS Data untuk pengolahan row data portofolio loan</div>
+                    <div class="bullet-point">Kesalahan inventarisasi akan berdampak signifikan pada keseluruhan project</div>
+                    <div class="bullet-point">Tujuan akhir: Membangun Big Data yang solid sebagai landasan Project Channeling</div>
+                </div>
+
+                <div class="flow-diagram">
+                    <div class="flow-box">Inventarisasi Data</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-box">Validasi & Konfirmasi</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-box">Big Data Baseline</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-box">Pilot Project</div>
+                </div>
+            </div>
+
+            <!-- Section 1: Tim & Tanggung Jawab -->
+            <div class="section">
+                <div class="card">
+                    <h3>👥 Stakeholder & Pembagian Tanggung Jawab</h3>
+                    <p style="margin: 15px 0;">Diperlukan pembagian tanggung jawab yang jelas antara dua tim utama:</p>
+                </div>
+
+                <div class="team-section">
+                    <div class="team-card">
+                        <h3>🤝 Tim Kemitraan</h3>
+                        <div style="text-align: left; margin-top: 15px;">
+                            <p style="margin: 10px 0;">• Memahami hubungan dengan Taspen</p>
+                            <p style="margin: 10px 0;">• Koordinasi dengan Unit Bisnis</p>
+                            <p style="margin: 10px 0;">• Verifikasi status kemitraan</p>
+                            <p style="margin: 10px 0;">• Follow-up konfirmasi lapangan</p>
+                        </div>
+                    </div>
+
+                    <div class="team-card">
+                        <h3>📈 Tim MIS Data</h3>
+                        <div style="text-align: left; margin-top: 15px;">
+                            <p style="margin: 10px 0;">• Pengolahan row data portofolio loan</p>
+                            <p style="margin: 10px 0;">• Mapping & agregasi data kompleks</p>
+                            <p style="margin: 10px 0;">• Validasi data teknis</p>
+                            <p style="margin: 10px 0;">• Penyusunan format data terstruktur</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <strong>🎯 Key Success Factor:</strong> Kolaborasi erat antara kedua tim dengan responsibility yang jelas untuk menghasilkan data optimal
+                </div>
+            </div>
+
+            <!-- Section 2: Populasi Data Loan -->
+            <div class="section">
+                <div class="card">
+                    <h3>1️⃣ Inventarisasi Populasi Data Loan - Pensiunan Taspen</h3>
+                    
+                    <h4>🔍 Proses Identifikasi</h4>
+                    <div class="bullet-point">Identifikasi data loan dengan debitur pensiunan Taspen (gaji sendiri / gaji pasangan)</div>
+                    <div class="bullet-point">Indikator mapping: data Dapem dan nama produk</div>
+                    <div class="bullet-point">Tidak terdapat kode unik langsung untuk status "pensiunan Taspen"</div>
+                </div>
+
+                <div class="challenge-box">
+                    <strong>⚠️ Tantangan Utama - Mapping Data:</strong>
+                    <div style="margin-top: 15px;">
+                        <p style="margin: 10px 0;"><strong>Sumber Data:</strong></p>
+                        <p style="margin: 5px 0; padding-left: 20px;">• MD 6400 (data loan) → identitas unik: <strong>CIF</strong> (1 debitur = 1 CIF)</p>
+                        <p style="margin: 5px 0; padding-left: 20px;">• Dapem (populasi pensiunan Taspen) → identitas unik: <strong>Nomor Taspen</strong> (1 debitur = 1 nomor)</p>
+                        
+                        <p style="margin: 15px 0 5px 0;"><strong>Kompleksitas:</strong></p>
+                        <p style="margin: 5px 0; padding-left: 20px;">• Satu debitur dapat memiliki <strong>lebih dari satu nomor Taspen</strong></p>
+                        <p style="margin: 5px 0; padding-left: 20px;">• Terjadi karena pengajuan pinjaman dengan dua sumber gaji</p>
+                        <p style="margin: 5px 0; padding-left: 20px;">• Hubungan data menjadi <strong>tidak one-to-one</strong></p>
+                        <p style="margin: 5px 0; padding-left: 20px;">• Memerlukan <strong>agregasi yang lebih kompleks</strong></p>
+                    </div>
+                </div>
+
+                <div class="output-box">
+                    <strong>✅ Output yang Diharapkan:</strong>
+                    <div style="margin-top: 10px;">
+                        Data populasi loan pensiunan Taspen yang <strong>FIRM</strong>, valid, dan dapat dipertanggungjawabkan sebagai basis untuk tahap berikutnya
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Data Move Out -->
+            <div class="section">
+                <div class="card">
+                    <h3>2️⃣ Breakdown Data Loan - Move Out (April - Now)</h3>
+                    
+                    <h4>🎯 Fokus Analisis</h4>
+                    <div class="bullet-point">Identifikasi loan yang gaji efektifnya sebelumnya masuk ke BWS</div>
+                    <div class="bullet-point">Namun keluar (move out) pada periode April - sekarang</div>
+                </div>
+
+                <div class="card">
+                    <h4>📋 Kemungkinan Penyebab "Gaji Keluar"</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #dc3545;">
+                            <strong>❌ Debitur Meninggal</strong>
+                            <p style="margin-top: 8px; font-size: 0.9em;">Tidak termasuk fokus</p>
+                        </div>
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107;">
+                            <strong>⏸️ Rekening Pasif</strong>
+                            <p style="margin-top: 8px; font-size: 0.9em;">Taspen hentikan pembayaran sementara</p>
+                        </div>
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745;">
+                            <strong>✅ Pindah Gaji Aktual</strong>
+                            <p style="margin-top: 8px; font-size: 0.9em;"><strong>FOKUS UTAMA</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <strong>🎯 Prioritas:</strong> Debitur yang <strong>benar-benar pindah gaji secara aktual</strong> (bukan karena meninggal atau pasif)
+                </div>
+
+                <div class="card">
+                    <h4>📊 Format Data Terstruktur untuk Unit Bisnis</h4>
+                    <p style="margin: 15px 0;">Sebelum dikirim ke Unit Bisnis, data harus disajikan dalam format yang memudahkan konfirmasi:</p>
+                    
+                    <div class="bullet-point">Pengelompokan berdasarkan bulan gaji keluar</div>
+                    <div class="bullet-point">Indikasi ketidakcukupan gaji karena dua sumber gaji</div>
+                    <div class="bullet-point">Kasus gaji cukup untuk total angsuran, namun salah satu gaji move out</div>
+                    <div class="bullet-point">Kelompok-kelompok lain sesuai kebutuhan analisis</div>
+                </div>
+
+                <div class="output-box">
+                    <strong>🎁 Manfaat Pengelompokan:</strong>
+                    <div style="margin-top: 10px;">
+                        <p style="margin: 8px 0;">✓ Memudahkan Unit Bisnis melakukan pengecekan</p>
+                        <p style="margin: 8px 0;">✓ Membantu Kantor Pusat melakukan monitoring</p>
+                        <p style="margin: 8px 0;">✓ Meminimalkan laporan yang tidak akurat atau asal-asalan</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Konfirmasi Unit Bisnis -->
+            <div class="section">
+                <div class="card">
+                    <h3>3️⃣ Rekap Setelah Konfirmasi Unit Bisnis</h3>
+                    
+                    <h4>🔍 Proses Konfirmasi</h4>
+                    <div class="bullet-point">Unit Bisnis pemilik loan wajib mengonfirmasi <strong>root cause</strong> utama ketidakterimaan gaji</div>
+                    <div class="bullet-point">Feedback harus valid, mudah diverifikasi, dan dapat dipertanggungjawabkan</div>
+                    <div class="bullet-point">Data yang sudah dikonfirmasi dan dipastikan bukan karena meninggal/pasif akan direkap ulang</div>
+                </div>
+
+                <div class="card">
+                    <h4>📝 Format Rekap untuk Unit Bisnis</h4>
+                    <p style="margin: 15px 0;">Setelah verifikasi, data dalam format ringkas dikirim kembali sebagai dasar:</p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-top: 20px;">
+                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 10px;">
+                            <strong style="font-size: 1.2em;">💰 1. Perhitungan Pinalti</strong>
+                            <p style="margin-top: 10px; opacity: 0.9;">Sesuai Perjanjian Kredit</p>
+                        </div>
+                        <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 20px; border-radius: 10px;">
+                            <strong style="font-size: 1.2em;">🛡️ 2. Pengembalian Premi</strong>
+                            <p style="margin-top: 10px; opacity: 0.9;">Premi Asuransi</p>
+                        </div>
+                        <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; padding: 20px; border-radius: 10px;">
+                            <strong style="font-size: 1.2em;">📄 3. Verifikasi Jaminan</strong>
+                            <p style="margin-top: 10px; opacity: 0.9;">Status SK Asli</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <strong>📊 Monitoring Progress:</strong> Kantor Pusat harus menyiapkan sistem monitoring yang jelas untuk memastikan Unit Bisnis memberikan laporan secara <strong>tepat waktu dan akurat</strong>
+                </div>
+            </div>
+
+            <!-- Section 5: Finalisasi -->
+            <div class="section">
+                <div class="card">
+                    <h3>4️⃣ Finalisasi Big Data Move Out</h3>
+                    
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 15px; margin: 20px 0;">
+                        <h4 style="color: white; font-size: 1.5em; margin-bottom: 15px;">🎯 Output Final</h4>
+                        <p style="font-size: 1.1em; line-height: 1.8;">Setelah semua proses selesai, <strong>Big Data Move Out ke POS</strong> dapat dijadikan data utama untuk <strong>Project Bisnis Channeling</strong></p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>🔄 Alur Proses Lengkap</h3>
+                    <div style="margin-top: 20px;">
+                        <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 5px solid #2196f3;">
+                            <strong>Step 1:</strong> Inventarisasi Populasi Data Loan Pensiunan Taspen
+                        </div>
+                        <div style="text-align: center; color: #667eea; font-size: 1.5em; margin: 10px 0;">↓</div>
+                        
+                        <div style="background: #fff3e0; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 5px solid #ff9800;">
+                            <strong>Step 2:</strong> Breakdown Data Move Out (April - Now)
+                        </div>
+                        <div style="text-align: center; color: #667eea; font-size: 1.5em; margin: 10px 0;">↓</div>
+                        
+                        <div style="background: #f3e5f5; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 5px solid #9c27b0;">
+                            <strong>Step 3:</strong> Format Terstruktur & Kirim ke Unit Bisnis
+                        </div>
+                        <div style="text-align: center; color: #667eea; font-size: 1.5em; margin: 10px 0;">↓</div>
+                        
+                        <div style="background: #e8f5e9; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 5px solid #4caf50;">
+                            <strong>Step 4:</strong> Konfirmasi & Verifikasi Root Cause
+                        </div>
+                        <div style="text-align: center; color: #667eea; font-size: 1.5em; margin: 10px 0;">↓</div>
+                        
+                        <div style="background: #fce4ec; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 5px solid #e91e63;">
+                            <strong>Step 5:</strong> Rekap Final (Pinalti, Premi, Jaminan)
+                        </div>
+                        <div style="text-align: center; color: #667eea; font-size: 1.5em; margin: 10px 0;">↓</div>
+                        
+                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 8px; margin: 10px 0; text-align: center;">
+                            <strong style="font-size: 1.2em;">🎉 BIG DATA MOVE OUT - Ready for Pilot Project!</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="output-box">
+                    <strong>✅ Critical Success Factors:</strong>
+                    <div style="margin-top: 10px;">
+                        <p style="margin: 8px 0;">✓ Data proven, akurat, dan dapat dipertanggungjawabkan</p>
+                        <p style="margin: 8px 0;">✓ Pembagian tanggung jawab yang jelas antara Tim Kemitraan & MIS Data</p>
+                        <p style="margin: 8px 0;">✓ Format data terstruktur dan mudah diverifikasi</p>
+                        <p style="margin: 8px 0;">✓ Monitoring progress yang konsisten</p>
+                        <p style="margin: 8px 0;">✓ Validasi menyeluruh dari Unit Bisnis</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(index) {
+            const sections = document.querySelectorAll('.section');
+            const pills = document.querySelectorAll('.nav-pill');
+            
+            sections.forEach(section => section.classList.remove('active'));
+            pills.forEach(pill => pill.classList.remove('active'));
+            
+            sections[index].classList.add('active');
+            pills[index].classList.add('active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
