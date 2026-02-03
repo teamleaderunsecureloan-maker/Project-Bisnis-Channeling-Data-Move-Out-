@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Bisnis Channeling - Data Inventarisasi</title>
+    <title>Business Channeling Proposal - BWS x Kopnuspos</title>
     <style>
         * {
             margin: 0;
@@ -14,73 +14,102 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            color: #333;
+            line-height: 1.6;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
+            padding: 20px;
         }
 
-        .header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             text-align: center;
         }
 
-        .header h1 {
+        header h1 {
             font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        header .subtitle {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .crisis-alert {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.3);
+        }
+
+        .crisis-alert h3 {
+            font-size: 1.5em;
             margin-bottom: 10px;
         }
 
-        .header p {
-            font-size: 1.2em;
-            opacity: 0.9;
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 20px;
+            z-index: 100;
         }
 
-        .nav-pills {
+        nav ul {
+            list-style: none;
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             gap: 10px;
-            padding: 20px;
-            background: #f8f9fa;
-            flex-wrap: wrap;
         }
 
-        .nav-pill {
+        nav button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
             padding: 12px 24px;
-            background: white;
-            border: 2px solid #667eea;
             border-radius: 25px;
             cursor: pointer;
+            font-size: 0.95em;
             transition: all 0.3s ease;
             font-weight: 600;
-            color: #667eea;
         }
 
-        .nav-pill:hover {
-            background: #667eea;
-            color: white;
+        nav button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
         }
 
-        .nav-pill.active {
-            background: #667eea;
-            color: white;
-        }
-
-        .content {
-            padding: 40px;
+        nav button.active {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);
         }
 
         .section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
             display: none;
             animation: fadeIn 0.5s ease;
         }
@@ -90,426 +119,1173 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin: 25px 0 15px 0;
         }
 
         .card {
-            background: white;
-            border-left: 5px solid #667eea;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             padding: 25px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
         }
 
         .card:hover {
-            transform: translateX(10px);
+            transform: translateX(5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
-        .card h3 {
+        .objective-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .objective-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .objective-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .objective-card h4 {
             color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.5em;
-        }
-
-        .card h4 {
-            color: #2a5298;
-            margin: 15px 0 10px 0;
             font-size: 1.2em;
+            margin-bottom: 10px;
         }
 
-        .bullet-point {
-            padding-left: 20px;
-            margin: 10px 0;
-            color: #444;
-            line-height: 1.8;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .bullet-point:before {
-            content: "→";
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:hover {
+            background: #f5f7fa;
+        }
+
+        .process-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .process-step {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .process-step:hover {
+            transform: translateX(10px);
+            border-left-width: 10px;
+        }
+
+        .process-step h4 {
             color: #667eea;
-            font-weight: bold;
-            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .risk-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 5px;
+        }
+
+        .risk-high {
+            background: #f5576c;
+            color: white;
+        }
+
+        .risk-medium {
+            background: #ffa726;
+            color: white;
+        }
+
+        .risk-low {
+            background: #66bb6a;
+            color: white;
+        }
+
+        .kpi-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .kpi-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .kpi-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .kpi-value {
+            font-size: 2em;
+            font-weight: 700;
+            color: #667eea;
+            margin: 10px 0;
+        }
+
+        .kpi-label {
+            color: #666;
+            font-size: 0.9em;
         }
 
         .highlight {
-            background: linear-gradient(120deg, #ffeaa7 0%, #fdcb6e 100%);
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            color: white;
             padding: 20px;
             border-radius: 10px;
             margin: 20px 0;
-            border-left: 5px solid #e17055;
-        }
-
-        .highlight strong {
-            color: #d63031;
         }
 
         .flow-diagram {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            margin: 30px 0;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .flow-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
+            background: white;
+            padding: 30px;
             border-radius: 15px;
-            text-align: center;
-            min-width: 150px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .flow-box:hover {
-            transform: scale(1.1);
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .flow-arrow {
+            text-align: center;
             font-size: 2em;
             color: #667eea;
-        }
-
-        .team-section {
-            display: flex;
-            gap: 20px;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-
-        .team-card {
-            flex: 1;
-            min-width: 250px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-
-        .team-card h3 {
-            color: white;
-            margin-bottom: 15px;
-        }
-
-        .challenge-box {
-            background: #fff3cd;
-            border-left: 5px solid #ffc107;
-            padding: 20px;
-            margin: 15px 0;
-            border-radius: 8px;
-        }
-
-        .challenge-box strong {
-            color: #856404;
-        }
-
-        .output-box {
-            background: #d4edda;
-            border-left: 5px solid #28a745;
-            padding: 20px;
-            margin: 15px 0;
-            border-radius: 8px;
-        }
-
-        .output-box strong {
-            color: #155724;
+            margin: 10px 0;
         }
 
         @media (max-width: 768px) {
-            .header h1 {
+            header h1 {
                 font-size: 1.8em;
             }
-            
-            .nav-pill {
-                padding: 10px 15px;
-                font-size: 0.9em;
+
+            nav ul {
+                flex-direction: column;
             }
-            
-            .content {
+
+            nav button {
+                width: 100%;
+            }
+
+            .section {
                 padding: 20px;
             }
+        }
+
+        .stats-highlight {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .stat-box .number {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-item h4 {
+            color: #667eea;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>🏦 Project Bisnis Channeling</h1>
-            <p>Inventarisasi Data Move Out April - Now</p>
-        </div>
+        <header>
+            <h1>🏦 Business Channeling Proposal</h1>
+            <div class="subtitle">BWS x Kopnuspos Strategic Partnership</div>
+            <div class="crisis-alert">
+                <h3>⚠️ SITUASI KRISIS</h3>
+                <p><strong>610 Debitur</strong> dengan outstanding <strong>Rp 90 Miliar</strong> terancam NPL akibat kebijakan PT Taspen April 2025</p>
+            </div>
+        </header>
 
-        <div class="nav-pills">
-            <button class="nav-pill active" onclick="showSection(0)">Overview</button>
-            <button class="nav-pill" onclick="showSection(1)">Tim & Tanggung Jawab</button>
-            <button class="nav-pill" onclick="showSection(2)">Populasi Data Loan</button>
-            <button class="nav-pill" onclick="showSection(3)">Data Move Out</button>
-            <button class="nav-pill" onclick="showSection(4)">Konfirmasi Unit Bisnis</button>
-            <button class="nav-pill" onclick="showSection(5)">Finalisasi</button>
-        </div>
+        <nav>
+            <ul>
+                <li><button onclick="showSection(0)" class="active">Ringkasan Eksekutif</button></li>
+                <li><button onclick="showSection(1)">Analisis Situasi</button></li>
+                <li><button onclick="showSection(2)">Model Bisnis</button></li>
+                <li><button onclick="showSection(3)">Proses End-to-End</button></li>
+                <li><button onclick="showSection(4)">Infrastruktur</button></li>
+                <li><button onclick="showSection(5)">Manajemen Risiko</button></li>
+                <li><button onclick="showSection(6)">Mitigasi</button></li>
+                <li><button onclick="showSection(7)">KPI & Evaluasi</button></li>
+            </ul>
+        </nav>
 
-        <div class="content">
-            <!-- Section 0: Overview -->
-            <div class="section active">
-                <div class="card">
-                    <h3>🎯 Tujuan Project</h3>
-                    <p style="line-height: 1.8; margin: 15px 0;">Melakukan inventarisasi data untuk mendukung <strong>Project Bisnis Channeling</strong> dengan membangun baseline database yang solid, valid, dan dapat dipertanggungjawabkan untuk Pilot Project.</p>
+        <!-- BAB I: RINGKASAN EKSEKUTIF -->
+        <div class="section active">
+            <h2>BAB I: Ringkasan Eksekutif dan Rasional Bisnis</h2>
+            
+            <div class="stats-highlight">
+                <div class="stat-box">
+                    <div class="number">610</div>
+                    <div>Debitur Berisiko</div>
                 </div>
-
-                <div class="highlight">
-                    <strong>⚠️ Prinsip Utama:</strong> Data yang disajikan harus bersifat <strong>PROVEN, AKURAT, dan DAPAT DIPERTANGGUNGJAWABKAN</strong>
+                <div class="stat-box">
+                    <div class="number">Rp 90M</div>
+                    <div>Outstanding Portfolio</div>
                 </div>
-
-                <div class="card">
-                    <h3>📊 Konteks Bisnis</h3>
-                    <div class="bullet-point">Data berkaitan dengan proses kemitraan (hubungan dengan Taspen)</div>
-                    <div class="bullet-point">Memerlukan kapabilitas MIS Data untuk pengolahan row data portofolio loan</div>
-                    <div class="bullet-point">Kesalahan inventarisasi akan berdampak signifikan pada keseluruhan project</div>
-                    <div class="bullet-point">Tujuan akhir: Membangun Big Data yang solid sebagai landasan Project Channeling</div>
-                </div>
-
-                <div class="flow-diagram">
-                    <div class="flow-box">Inventarisasi Data</div>
-                    <div class="flow-arrow">→</div>
-                    <div class="flow-box">Validasi & Konfirmasi</div>
-                    <div class="flow-arrow">→</div>
-                    <div class="flow-box">Big Data Baseline</div>
-                    <div class="flow-arrow">→</div>
-                    <div class="flow-box">Pilot Project</div>
+                <div class="stat-box">
+                    <div class="number">55%</div>
+                    <div>Kontribusi Taspen</div>
                 </div>
             </div>
 
-            <!-- Section 1: Tim & Tanggung Jawab -->
-            <div class="section">
-                <div class="card">
-                    <h3>👥 Stakeholder & Pembagian Tanggung Jawab</h3>
-                    <p style="margin: 15px 0;">Diperlukan pembagian tanggung jawab yang jelas antara dua tim utama:</p>
+            <h3>A. Latar Belakang dan Identifikasi Masalah</h3>
+            <div class="card">
+                <h4>Masalah Utama</h4>
+                <p><strong>1. Risiko Operasional dan NPL:</strong> Pemindahan 610 debitur dengan outstanding Rp 90 Miliar ke kantor bayar PT Pos mengancam mekanisme auto-debit yang selama ini berjalan lancar. Kegagalan ini berpotensi meningkatkan NPL secara signifikan.</p>
+                <p><strong>2. Risiko Bisnis Jangka Panjang:</strong> Segmen pensiunan Taspen menyumbang 55% dari total portofolio kredit pensiun. Penutupan akses ke sumber pertumbuhan ini menuntut model bisnis alternatif yang berkelanjutan.</p>
+            </div>
+
+            <h3>B. Objektif Bisnis Channeling</h3>
+            <div class="objective-grid">
+                <div class="objective-card">
+                    <h4>1. Penyelamatan Portofolio</h4>
+                    <p>Mempertahankan kualitas portofolio eksisting dari risiko NPL</p>
+                    <p><strong>Target:</strong> Kolektibilitas lancar minimal 95%</p>
                 </div>
-
-                <div class="team-section">
-                    <div class="team-card">
-                        <h3>🤝 Tim Kemitraan</h3>
-                        <div style="text-align: left; margin-top: 15px;">
-                            <p style="margin: 10px 0;">• Memahami hubungan dengan Taspen</p>
-                            <p style="margin: 10px 0;">• Koordinasi dengan Unit Bisnis</p>
-                            <p style="margin: 10px 0;">• Verifikasi status kemitraan</p>
-                            <p style="margin: 10px 0;">• Follow-up konfirmasi lapangan</p>
-                        </div>
-                    </div>
-
-                    <div class="team-card">
-                        <h3>📈 Tim MIS Data</h3>
-                        <div style="text-align: left; margin-top: 15px;">
-                            <p style="margin: 10px 0;">• Pengolahan row data portofolio loan</p>
-                            <p style="margin: 10px 0;">• Mapping & agregasi data kompleks</p>
-                            <p style="margin: 10px 0;">• Validasi data teknis</p>
-                            <p style="margin: 10px 0;">• Penyusunan format data terstruktur</p>
-                        </div>
-                    </div>
+                <div class="objective-card">
+                    <h4>2. Validasi Model Bisnis</h4>
+                    <p>Menguji kelayakan operasional dan komersial model channeling</p>
+                    <p><strong>Target:</strong> Konversi minimal 60% dari 610 debitur</p>
                 </div>
-
-                <div class="highlight">
-                    <strong>🎯 Key Success Factor:</strong> Kolaborasi erat antara kedua tim dengan responsibility yang jelas untuk menghasilkan data optimal
+                <div class="objective-card">
+                    <h4>3. Pembangunan Kemitraan</h4>
+                    <p>Menjalin kerja sama berkelanjutan dengan Kopnuspos</p>
+                    <p><strong>Target:</strong> Membangun trust dan track record</p>
+                </div>
+                <div class="objective-card">
+                    <h4>4. Pengembangan Infrastruktur</h4>
+                    <p>Menciptakan proses yang scalable dan terkontrol risikonya</p>
+                    <p><strong>Target:</strong> Aplikasi internal dan SOP lengkap</p>
                 </div>
             </div>
 
-            <!-- Section 2: Populasi Data Loan -->
-            <div class="section">
-                <div class="card">
-                    <h3>1️⃣ Inventarisasi Populasi Data Loan - Pensiunan Taspen</h3>
-                    
-                    <h4>🔍 Proses Identifikasi</h4>
-                    <div class="bullet-point">Identifikasi data loan dengan debitur pensiunan Taspen (gaji sendiri / gaji pasangan)</div>
-                    <div class="bullet-point">Indikator mapping: data Dapem dan nama produk</div>
-                    <div class="bullet-point">Tidak terdapat kode unik langsung untuk status "pensiunan Taspen"</div>
-                </div>
-
-                <div class="challenge-box">
-                    <strong>⚠️ Tantangan Utama - Mapping Data:</strong>
-                    <div style="margin-top: 15px;">
-                        <p style="margin: 10px 0;"><strong>Sumber Data:</strong></p>
-                        <p style="margin: 5px 0; padding-left: 20px;">• MD 6400 (data loan) → identitas unik: <strong>CIF</strong> (1 debitur = 1 CIF)</p>
-                        <p style="margin: 5px 0; padding-left: 20px;">• Dapem (populasi pensiunan Taspen) → identitas unik: <strong>Nomor Taspen</strong> (1 debitur = 1 nomor)</p>
-                        
-                        <p style="margin: 15px 0 5px 0;"><strong>Kompleksitas:</strong></p>
-                        <p style="margin: 5px 0; padding-left: 20px;">• Satu debitur dapat memiliki <strong>lebih dari satu nomor Taspen</strong></p>
-                        <p style="margin: 5px 0; padding-left: 20px;">• Terjadi karena pengajuan pinjaman dengan dua sumber gaji</p>
-                        <p style="margin: 5px 0; padding-left: 20px;">• Hubungan data menjadi <strong>tidak one-to-one</strong></p>
-                        <p style="margin: 5px 0; padding-left: 20px;">• Memerlukan <strong>agregasi yang lebih kompleks</strong></p>
-                    </div>
-                </div>
-
-                <div class="output-box">
-                    <strong>✅ Output yang Diharapkan:</strong>
-                    <div style="margin-top: 10px;">
-                        Data populasi loan pensiunan Taspen yang <strong>FIRM</strong>, valid, dan dapat dipertanggungjawabkan sebagai basis untuk tahap berikutnya
-                    </div>
-                </div>
+            <h3>C. Ruang Lingkup Pilot Project</h3>
+            <div class="card">
+                <p><strong>Batasan Debitur:</strong> Hanya 610 debitur yang gajinya dipindahkan ke PT Pos dan masih memiliki pinjaman aktif di BWS</p>
+                <p><strong>Batasan Unit Bisnis:</strong> Eksekusi oleh satu Unit Bisnis yang ditunjuk berdasarkan operational excellence</p>
+                <p><strong>Rasional:</strong> Risk Minimization, Ease of Evaluation, Simplified Monitoring, dan Faster Learning</p>
             </div>
 
-            <!-- Section 3: Data Move Out -->
-            <div class="section">
-                <div class="card">
-                    <h3>2️⃣ Breakdown Data Loan - Move Out (April - Now)</h3>
-                    
-                    <h4>🎯 Fokus Analisis</h4>
-                    <div class="bullet-point">Identifikasi loan yang gaji efektifnya sebelumnya masuk ke BWS</div>
-                    <div class="bullet-point">Namun keluar (move out) pada periode April - sekarang</div>
-                </div>
+            <h3>D. Mekanisme Kerjasama Channeling</h3>
+            <table>
+                <tr>
+                    <th>Aspek</th>
+                    <th>BWS (Bank)</th>
+                    <th>Kopnuspos (Channel Partner)</th>
+                </tr>
+                <tr>
+                    <td><strong>Fungsi Utama</strong></td>
+                    <td>Penyedia Dana 100% & Penanggung Risiko Kredit</td>
+                    <td>Originator & Servicer debitur</td>
+                </tr>
+                <tr>
+                    <td><strong>Keputusan Kredit</strong></td>
+                    <td>Penentu kebijakan, pricing, tenor, final decision</td>
+                    <td>Sourcing calon debitur & pengumpulan data</td>
+                </tr>
+                <tr>
+                    <td><strong>Mekanisme Pembayaran</strong></td>
+                    <td>Menerima bulk payment dari Kopnuspos</td>
+                    <td>Fasilitator pemotongan angsuran via PT Pos</td>
+                </tr>
+                <tr>
+                    <td><strong>Struktur Komersial</strong></td>
+                    <td>Interest income dari suku bunga kredit</td>
+                    <td>Revenue dari biaya administrasi debitur</td>
+                </tr>
+            </table>
 
-                <div class="card">
-                    <h4>📋 Kemungkinan Penyebab "Gaji Keluar"</h4>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
-                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #dc3545;">
-                            <strong>❌ Debitur Meninggal</strong>
-                            <p style="margin-top: 8px; font-size: 0.9em;">Tidak termasuk fokus</p>
-                        </div>
-                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107;">
-                            <strong>⏸️ Rekening Pasif</strong>
-                            <p style="margin-top: 8px; font-size: 0.9em;">Taspen hentikan pembayaran sementara</p>
-                        </div>
-                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745;">
-                            <strong>✅ Pindah Gaji Aktual</strong>
-                            <p style="margin-top: 8px; font-size: 0.9em;"><strong>FOKUS UTAMA</strong></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="highlight">
-                    <strong>🎯 Prioritas:</strong> Debitur yang <strong>benar-benar pindah gaji secara aktual</strong> (bukan karena meninggal atau pasif)
-                </div>
-
-                <div class="card">
-                    <h4>📊 Format Data Terstruktur untuk Unit Bisnis</h4>
-                    <p style="margin: 15px 0;">Sebelum dikirim ke Unit Bisnis, data harus disajikan dalam format yang memudahkan konfirmasi:</p>
-                    
-                    <div class="bullet-point">Pengelompokan berdasarkan bulan gaji keluar</div>
-                    <div class="bullet-point">Indikasi ketidakcukupan gaji karena dua sumber gaji</div>
-                    <div class="bullet-point">Kasus gaji cukup untuk total angsuran, namun salah satu gaji move out</div>
-                    <div class="bullet-point">Kelompok-kelompok lain sesuai kebutuhan analisis</div>
-                </div>
-
-                <div class="output-box">
-                    <strong>🎁 Manfaat Pengelompokan:</strong>
-                    <div style="margin-top: 10px;">
-                        <p style="margin: 8px 0;">✓ Memudahkan Unit Bisnis melakukan pengecekan</p>
-                        <p style="margin: 8px 0;">✓ Membantu Kantor Pusat melakukan monitoring</p>
-                        <p style="margin: 8px 0;">✓ Meminimalkan laporan yang tidak akurat atau asal-asalan</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section 4: Konfirmasi Unit Bisnis -->
-            <div class="section">
-                <div class="card">
-                    <h3>3️⃣ Rekap Setelah Konfirmasi Unit Bisnis</h3>
-                    
-                    <h4>🔍 Proses Konfirmasi</h4>
-                    <div class="bullet-point">Unit Bisnis pemilik loan wajib mengonfirmasi <strong>root cause</strong> utama ketidakterimaan gaji</div>
-                    <div class="bullet-point">Feedback harus valid, mudah diverifikasi, dan dapat dipertanggungjawabkan</div>
-                    <div class="bullet-point">Data yang sudah dikonfirmasi dan dipastikan bukan karena meninggal/pasif akan direkap ulang</div>
-                </div>
-
-                <div class="card">
-                    <h4>📝 Format Rekap untuk Unit Bisnis</h4>
-                    <p style="margin: 15px 0;">Setelah verifikasi, data dalam format ringkas dikirim kembali sebagai dasar:</p>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-top: 20px;">
-                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 10px;">
-                            <strong style="font-size: 1.2em;">💰 1. Perhitungan Pinalti</strong>
-                            <p style="margin-top: 10px; opacity: 0.9;">Sesuai Perjanjian Kredit</p>
-                        </div>
-                        <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 20px; border-radius: 10px;">
-                            <strong style="font-size: 1.2em;">🛡️ 2. Pengembalian Premi</strong>
-                            <p style="margin-top: 10px; opacity: 0.9;">Premi Asuransi</p>
-                        </div>
-                        <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; padding: 20px; border-radius: 10px;">
-                            <strong style="font-size: 1.2em;">📄 3. Verifikasi Jaminan</strong>
-                            <p style="margin-top: 10px; opacity: 0.9;">Status SK Asli</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="highlight">
-                    <strong>📊 Monitoring Progress:</strong> Kantor Pusat harus menyiapkan sistem monitoring yang jelas untuk memastikan Unit Bisnis memberikan laporan secara <strong>tepat waktu dan akurat</strong>
-                </div>
-            </div>
-
-            <!-- Section 5: Finalisasi -->
-            <div class="section">
-                <div class="card">
-                    <h3>4️⃣ Finalisasi Big Data Move Out</h3>
-                    
-                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 15px; margin: 20px 0;">
-                        <h4 style="color: white; font-size: 1.5em; margin-bottom: 15px;">🎯 Output Final</h4>
-                        <p style="font-size: 1.1em; line-height: 1.8;">Setelah semua proses selesai, <strong>Big Data Move Out ke POS</strong> dapat dijadikan data utama untuk <strong>Project Bisnis Channeling</strong></p>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3>🔄 Alur Proses Lengkap</h3>
-                    <div style="margin-top: 20px;">
-                        <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 5px solid #2196f3;">
-                            <strong>Step 1:</strong> Inventarisasi Populasi Data Loan Pensiunan Taspen
-                        </div>
-                        <div style="text-align: center; color: #667eea; font-size: 1.5em; margin: 10px 0;">↓</div>
-                        
-                        <div style="background: #fff3e0; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 5px solid #ff9800;">
-                            <strong>Step 2:</strong> Breakdown Data Move Out (April - Now)
-                        </div>
-                        <div style="text-align: center; color: #667eea; font-size: 1.5em; margin: 10px 0;">↓</div>
-                        
-                        <div style="background: #f3e5f5; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 5px solid #9c27b0;">
-                            <strong>Step 3:</strong> Format Terstruktur & Kirim ke Unit Bisnis
-                        </div>
-                        <div style="text-align: center; color: #667eea; font-size: 1.5em; margin: 10px 0;">↓</div>
-                        
-                        <div style="background: #e8f5e9; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 5px solid #4caf50;">
-                            <strong>Step 4:</strong> Konfirmasi & Verifikasi Root Cause
-                        </div>
-                        <div style="text-align: center; color: #667eea; font-size: 1.5em; margin: 10px 0;">↓</div>
-                        
-                        <div style="background: #fce4ec; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 5px solid #e91e63;">
-                            <strong>Step 5:</strong> Rekap Final (Pinalti, Premi, Jaminan)
-                        </div>
-                        <div style="text-align: center; color: #667eea; font-size: 1.5em; margin: 10px 0;">↓</div>
-                        
-                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 8px; margin: 10px 0; text-align: center;">
-                            <strong style="font-size: 1.2em;">🎉 BIG DATA MOVE OUT - Ready for Pilot Project!</strong>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="output-box">
-                    <strong>✅ Critical Success Factors:</strong>
-                    <div style="margin-top: 10px;">
-                        <p style="margin: 8px 0;">✓ Data proven, akurat, dan dapat dipertanggungjawabkan</p>
-                        <p style="margin: 8px 0;">✓ Pembagian tanggung jawab yang jelas antara Tim Kemitraan & MIS Data</p>
-                        <p style="margin: 8px 0;">✓ Format data terstruktur dan mudah diverifikasi</p>
-                        <p style="margin: 8px 0;">✓ Monitoring progress yang konsisten</p>
-                        <p style="margin: 8px 0;">✓ Validasi menyeluruh dari Unit Bisnis</p>
-                    </div>
+            <div class="flow-diagram">
+                <h4>Alur Pembayaran Angsuran</h4>
+                <div style="text-align: center;">
+                    <div style="background: #667eea; color: white; padding: 15px; border-radius: 10px; margin: 10px; display: inline-block;">Gaji Pensiun → PT Pos</div>
+                    <div class="flow-arrow">↓</div>
+                    <div style="background: #764ba2; color: white; padding: 15px; border-radius: 10px; margin: 10px; display: inline-block;">Auto-debit → Escrow Kopnuspos</div>
+                    <div class="flow-arrow">↓</div>
+                    <div style="background: #f5576c; color: white; padding: 15px; border-radius: 10px; margin: 10px; display: inline-block;">Bulk Payment → BWS (Tgl 25)</div>
+                    <div class="flow-arrow">↓</div>
+                    <div style="background: #66bb6a; color: white; padding: 15px; border-radius: 10px; margin: 10px; display: inline-block;">Payroll → Loan Account</div>
                 </div>
             </div>
         </div>
+
+        <!-- BAB II: ANALISIS SITUASI -->
+        <div class="section">
+            <h2>BAB II: Analisis Situasi dan Rasional Bisnis</h2>
+            
+            <h3>A. Identifikasi Masalah Utama</h3>
+            
+            <div class="card">
+                <h4>1. Isu Taspen dan Pemindahan Debitur</h4>
+                <p><strong>Akar Permasalahan:</strong> BWS kehilangan akses untuk onboarding pensiunan Taspen baru, menutup sumber pertumbuhan utama</p>
+                <p><strong>Pemindahan Debitur:</strong> 610 debitur dengan pinjaman aktif dipindahkan massal ke PT Pos</p>
+                <p><strong>Critical Gap:</strong> Tidak ada mekanisme auto-debit dari rekening PT Pos</p>
+            </div>
+
+            <div class="card">
+                <h4>2. Potensi Peningkatan NPL</h4>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>Immediate Impact (0-3 Bulan)</h4>
+                        <p>Debitur tidak menyadari angsuran gagal terpotong. Portfolio mulai masuk DPK (Dalam Perhatian Khusus)</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Medium Impact (3-6 Bulan)</h4>
+                        <p>Akumulasi tunggakan meningkat. Upaya collection dengan success rate rendah. Debitur masuk Kol 2-3</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Long-term Impact (6-12 Bulan)</h4>
+                        <p>Rasio NPL segmen pensiunan meningkat signifikan. Reputasi BWS tergerus, potensi write-off meningkat</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>B. Justifikasi Pemilihan Mitra (Kopnuspos)</h3>
+            <div class="objective-grid">
+                <div class="objective-card">
+                    <h4>1. Akses Langsung</h4>
+                    <p>Kopnuspos adalah authorized partner PT Pos, memberikan BWS akses ke pensiunan yang dibayar via PT Pos</p>
+                </div>
+                <div class="objective-card">
+                    <h4>2. Integrasi Sistem</h4>
+                    <p>Terintegrasi dengan sistem payroll PT Pos untuk mekanisme auto-debit yang andal</p>
+                </div>
+                <div class="objective-card">
+                    <h4>3. Kepercayaan</h4>
+                    <p>Pensiunan sudah familiar dengan Kopnuspos, mempermudah proses konversi</p>
+                </div>
+                <div class="objective-card">
+                    <h4>4. Jangkauan</h4>
+                    <p>Jaringan Kopnuspos mengikuti presence PT Pos di seluruh Indonesia</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- BAB III: DESAIN MODEL BISNIS -->
+        <div class="section">
+            <h2>BAB III: Desain Model Bisnis dan Mekanisme Operasional</h2>
+            
+            <h3>A. Struktur Model Channeling</h3>
+            <table>
+                <tr>
+                    <th>Aspek</th>
+                    <th>BWS - Principal & Capital Provider</th>
+                    <th>Kopnuspos - Originator & Servicer</th>
+                </tr>
+                <tr>
+                    <td><strong>Fungsi Utama</strong></td>
+                    <td>Pemilik 100% portofolio, Penanggung Risiko Kredit, Final Decision Maker</td>
+                    <td>Sourcing debitur, Fasilitator pemotongan angsuran, Primary Contact debitur</td>
+                </tr>
+                <tr>
+                    <td><strong>Hak Komersial</strong></td>
+                    <td>Interest income dari suku bunga kredit</td>
+                    <td>Revenue dari biaya administrasi debitur</td>
+                </tr>
+                <tr>
+                    <td><strong>Kewajiban Kepatuhan</strong></td>
+                    <td>Regulatory compliance & hak audit dokumen</td>
+                    <td>Data akurat, reporting berkala, maintenance dokumen fisik</td>
+                </tr>
+            </table>
+
+            <h3>B. Profil Debitur Pilot Project</h3>
+            <div class="stats-highlight">
+                <div class="stat-box">
+                    <div class="number">67 Tahun</div>
+                    <div>Usia Rata-rata</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">Rp 128.6 Jt</div>
+                    <div>Outstanding Rata-rata</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">37%</div>
+                    <div>DSR Rata-rata</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">4.2 Tahun</div>
+                    <div>Sisa Tenor Rata-rata</div>
+                </div>
+            </div>
+
+            <div class="highlight">
+                <h4>Mengapa Fokus pada Debitur Eksisting?</h4>
+                <p><strong>Risk Management:</strong> Menghindari due diligence ekstensif dan potensi fraud pada debitur baru</p>
+                <p><strong>Pilot Focus:</strong> Memvalidasi mekanisme channeling dengan baseline data yang sudah ada</p>
+                <p><strong>Operational Simplicity:</strong> Memanfaatkan dokumen dasar yang sudah ada, hanya perlu refresh data</p>
+            </div>
+
+            <h3>C. Mekanisme Pengajuan dan Persetujuan (8 Tahap)</h3>
+            <div class="process-flow">
+                <div class="process-step">
+                    <h4>Stage 1-2: Data Preparation & Sharing</h4>
+                    <p><strong>PIC:</strong> BWS MIS Data Credit Support</p>
+                    <p><strong>Output:</strong> Data 610 debitur terenkripsi dengan Approval Matrix berlapis</p>
+                </div>
+                <div class="process-step">
+                    <h4>Stage 3: Inventarisasi</h4>
+                    <p><strong>PIC:</strong> Kopnuspos</p>
+                    <p><strong>Aktivitas:</strong> Verify Alive, Address, Willing, Gaji via PT Pos</p>
+                    <p><strong>Output:</strong> Status mapping (Propose, Pending, Reject)</p>
+                </div>
+                <div class="process-step">
+                    <h4>Stage 4: Proposal Submission</h4>
+                    <p><strong>PIC:</strong> Kopnuspos</p>
+                    <p><strong>Output:</strong> Proposal kredit dalam format Excel ke PIC MIS BWS</p>
+                </div>
+                <div class="process-step">
+                    <h4>Stage 5: Validasi Otomatis</h4>
+                    <p><strong>PIC:</strong> Aplikasi Internal BWS</p>
+                    <p><strong>Aktivitas:</strong> Data Consistency Check, Financial Validation, Policy Compliance</p>
+                    <p><strong>Output:</strong> Mismatch Report jika ada ketidaksesuaian</p>
+                </div>
+                <div class="process-step">
+                    <h4>Stage 6: Perbaikan Data</h4>
+                    <p><strong>PIC:</strong> Kopnuspos</p>
+                    <p><strong>Output:</strong> Data valid siap untuk final approval</p>
+                </div>
+                <div class="process-step">
+                    <h4>Stage 7: Validasi Kemampuan Bayar</h4>
+                    <p><strong>PIC:</strong> Kantor Pusat</p>
+                    <p><strong>Output:</strong> Approved atau Conditional (perlu deviasi)</p>
+                </div>
+                <div class="process-step">
+                    <h4>Stage 8: Final Approval & Eksekusi</h4>
+                    <p><strong>PIC:</strong> UB Pilot Project</p>
+                    <p><strong>Output:</strong> Loan terinput di core banking setelah pelunasan portfolio lama</p>
+                </div>
+            </div>
+
+            <h3>D. Mekanisme Pencairan dan Pengendalian Risiko (DCRM)</h3>
+            <div class="highlight">
+                <h4>⚠️ HIGH RISK BY DESIGN</h4>
+                <p>Pencairan dilakukan berdasarkan data txt tanpa dokumen fisik lengkap di awal untuk mempercepat penyelamatan portofolio</p>
+            </div>
+
+            <div class="card">
+                <h4>Two-Stage DCRM Check</h4>
+                <p><strong>Tahap 1 - Pre-Disbursement:</strong></p>
+                <ul>
+                    <li>Basis: Data digital (txt file) yang diunggah Kopnuspos</li>
+                    <li>Fokus: Validasi konsistensi data dan kepatuhan kebijakan</li>
+                    <li>Risiko: Tinggi (Fraud, Documentation, Identity theft)</li>
+                    <li>Mitigasi: Trust, audit trail ketat, komitmen buy back Kopnuspos</li>
+                </ul>
+                <p><strong>Tahap 2 - Post-Disbursement (Soft File):</strong></p>
+                <ul>
+                    <li>Waktu: Maksimal 30 hari setelah pencairan</li>
+                    <li>Aktivitas: Penyerahan dan pengecekan seluruh soft file dokumen</li>
+                    <li>Konsekuensi: BWS berhak meninjau kembali fasilitas jika tidak sesuai/lengkap</li>
+                </ul>
+            </div>
+
+            <table>
+                <tr>
+                    <th>Aspek</th>
+                    <th>Normal Loan</th>
+                    <th>Channeling</th>
+                </tr>
+                <tr>
+                    <td><strong>Pencairan</strong></td>
+                    <td>Rekening pribadi debitur</td>
+                    <td>Rekening penampungan debitur</td>
+                </tr>
+                <tr>
+                    <td><strong>Kepemilikan Rekening</strong></td>
+                    <td>Debitur (full access)</td>
+                    <td>BWS (debitur tidak punya akses)</td>
+                </tr>
+                <tr>
+                    <td><strong>Fungsi</strong></td>
+                    <td>End-user account</td>
+                    <td>Transit & operational account</td>
+                </tr>
+            </table>
+
+            <div class="card">
+                <h4>Rasional Pencairan via Rekening Penampungan:</h4>
+                <p>• BWS = Capital provider (pemberi dana)</p>
+                <p>• Kopnuspos = Customer facing (hubungan langsung dengan debitur)</p>
+                <p>• Debitur relationship dengan Kopnuspos, bukan dengan BWS</p>
+                <p>• Segala sesuatu harus melalui Kopnuspos</p>
+                <p>• Debitur tidak boleh punya direct access ke rekening di BWS</p>
+                <p>• Dana flow harus tercontrol melalui Kopnuspos sebagai intermediary</p>
+            </div>
+
+            <h3>E. Mekanisme Angsuran Bulanan</h3>
+            <table>
+                <tr>
+                    <th>Tanggal</th>
+                    <th>PIC</th>
+                    <th>Aktivitas</th>
+                    <th>Catatan Kritis</th>
+                </tr>
+                <tr>
+                    <td><strong>Awal Bulan</strong></td>
+                    <td>BWS</td>
+                    <td>Mengirimkan tagihan bulanan detail (billing statement)</td>
+                    <td>Memastikan Kopnuspos memiliki data tagihan akurat</td>
+                </tr>
+                <tr>
+                    <td><strong>Tanggal Gaji</strong></td>
+                    <td>PT Pos & Kopnuspos</td>
+                    <td>Gaji pensiun masuk via PT Pos. Angsuran di-auto-debit ke Escrow Account Kopnuspos</td>
+                    <td>Kopnuspos sebagai fasilitator pemotongan angsuran</td>
+                </tr>
+                <tr>
+                    <td><strong>Tanggal 25</strong></td>
+                    <td>Kopnuspos</td>
+                    <td>Mengirimkan Bulk Payment ke BWS</td>
+                    <td>Batas waktu penyetoran angsuran</td>
+                </tr>
+                <tr>
+                    <td><strong>Tanggal 25</strong></td>
+                    <td>BWS</td>
+                    <td>Melakukan payroll (posting) bulk payment ke masing-masing loan account</td>
+                    <td>Rekonsiliasi data bulk payment dengan billing statement</td>
+                </tr>
+            </table>
+
+            <div class="card">
+                <h4>Mitigasi Risiko Angsuran</h4>
+                <p><strong>Kewajiban Pelaporan:</strong> Kopnuspos wajib memberikan alasan tertulis detail untuk setiap debitur yang tidak terbayar dalam bulk payment</p>
+                <p><strong>Kualitas Portofolio:</strong> Target kolektibilitas lancar minimal 95% sebagai indikator utama keberhasilan</p>
+            </div>
+        </div>
+
+        <!-- BAB IV: PROSES BISNIS END-TO-END -->
+        <div class="section">
+            <h2>BAB IV: Proses Bisnis End-to-End</h2>
+            
+            <div class="process-flow">
+                <div class="process-step">
+                    <h4>Fase 1: Data Acquisition & Validation</h4>
+                    <p><strong>Aktivitas:</strong></p>
+                    <ul>
+                        <li>BWS mengirimkan data 610 debitur ke Kopnuspos</li>
+                        <li>Kopnuspos melakukan inventarisasi (Verify Alive, Address, Willing, Gaji)</li>
+                    </ul>
+                    <p><strong>Output:</strong> Status mapping debitur (Propose, Pending, Reject)</p>
+                </div>
+
+                <div class="process-step">
+                    <h4>Fase 2: Proposal & Struktur Kredit</h4>
+                    <p><strong>Aktivitas:</strong></p>
+                    <ul>
+                        <li>Kopnuspos mengirimkan proposal kredit</li>
+                        <li>Aplikasi internal BWS melakukan validasi otomatis</li>
+                    </ul>
+                    <p><strong>Output:</strong> Mismatch Report untuk perbaikan data (looping ke Fase 2)</p>
+                </div>
+
+                <div class="process-step">
+                    <h4>Fase 3: Verifikasi & Approval</h4>
+                    <p><strong>Aktivitas:</strong></p>
+                    <ul>
+                        <li>Kantor Pusat BWS validasi final terhadap Net Income</li>
+                        <li>Keputusan: Approved atau Conditional (perlu deviasi)</li>
+                    </ul>
+                    <p><strong>Output:</strong> Debitur siap untuk proses pelunasan fasilitas lama</p>
+                </div>
+
+                <div class="process-step">
+                    <h4>Fase 4: Pelunasan Portofolio Lama (Takeover)</h4>
+                    <p><strong>Aktivitas:</strong></p>
+                    <ul>
+                        <li>Unit Bisnis pemilik portfolio melakukan pelunasan fasilitas lama</li>
+                    </ul>
+                    <p><strong>Tujuan:</strong> Memastikan tidak ada pinjaman ganda dan portfolio lama telah di-clean-up</p>
+                </div>
+
+                <div class="process-step">
+                    <h4>Fase 5: Disbursement</h4>
+                    <p><strong>Aktivitas:</strong></p>
+                    <ul>
+                        <li>Unit Bisnis Pilot melakukan final check dan input loan ke core banking</li>
+                        <li>DCRM Pre-Disbursement Check</li>
+                        <li>Dana dicairkan ke rekening penampungan → Kopnuspos → Debitur</li>
+                    </ul>
+                    <p><span class="risk-badge risk-high">HIGH RISK by design - Status TBO untuk dokumentasi</span></p>
+                </div>
+
+                <div class="process-step">
+                    <h4>Fase 6: Maintenance & Monitoring</h4>
+                    <p><strong>Aktivitas:</strong></p>
+                    <ul>
+                        <li>Angsuran Bulanan: PT Pos → Escrow Kopnuspos → Bulk Payment ke BWS (tgl 25)</li>
+                        <li>Monitoring kolektibilitas (target 95% lancar)</li>
+                        <li>Early Warning System untuk kegagalan pembayaran</li>
+                        <li>DCRM Post-Disbursement Check (verifikasi dokumen dalam 30 hari)</li>
+                    </ul>
+                </div>
+
+                <div class="process-step">
+                    <h4>Fase 7: Exit Mechanism</h4>
+                    <p><strong>Skenario:</strong></p>
+                    <ul>
+                        <li><strong>Pelunasan Normal:</strong> Fasilitas berakhir sesuai tenor</li>
+                        <li><strong>Mandatory Buy Back:</strong> Kopnuspos wajib membeli kembali portofolio bermasalah (NPL) sesuai perjanjian</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- BAB V: INFRASTRUKTUR -->
+        <div class="section">
+            <h2>BAB V: Infrastruktur Pendukung</h2>
+            
+            <h3>A. Aplikasi Internal - Fungsi Utama</h3>
+            <div class="objective-grid">
+                <div class="objective-card">
+                    <h4>Data Ingestion & Validation</h4>
+                    <p>Menerima file usulan dari Kopnuspos dan melakukan Validasi Otomatis</p>
+                </div>
+                <div class="objective-card">
+                    <h4>Audit Trail Management</h4>
+                    <p>Mencatat seluruh riwayat perubahan status, remark, dan timestamp</p>
+                </div>
+                <div class="objective-card">
+                    <h4>Reporting & Monitoring</h4>
+                    <p>Menyediakan data real-time dan menghasilkan Mismatch Report</p>
+                </div>
+            </div>
+
+            <h3>B. Kebutuhan Integrasi Core Banking</h3>
+            <table>
+                <tr>
+                    <th>Kebutuhan Integrasi</th>
+                    <th>Tujuan</th>
+                </tr>
+                <tr>
+                    <td><strong>Input Loan</strong></td>
+                    <td>Memungkinkan UB Pilot input data loan baru ke WGSS sesuai usulan mitra</td>
+                </tr>
+                <tr>
+                    <td><strong>Output Data Channeling</strong></td>
+                    <td>Memastikan data loan terintegrasi kembali ke aplikasi internal untuk monitoring</td>
+                </tr>
+                <tr>
+                    <td><strong>DCRM Cross-Check</strong></td>
+                    <td>WGSS menyediakan data (MCC) untuk DCRM verifikasi konsistensi sebelum disbursement</td>
+                </tr>
+            </table>
+
+            <h3>C. Data Security & Access Control</h3>
+            <div class="card">
+                <p><strong>Data Encryption:</strong> Seluruh data sensitif yang dikirimkan ke Kopnuspos harus dienkripsi</p>
+                <p><strong>Confidentiality Agreement:</strong> Kopnuspos wajib menandatangani perjanjian kerahasiaan</p>
+                <p><strong>Access Control:</strong> Akses aplikasi internal hanya untuk internal user BWS yang berwenang. Kopnuspos tidak memiliki akses langsung</p>
+            </div>
+
+            <h3>D. Audit Trail & Documentation</h3>
+            <table>
+                <tr>
+                    <th>Komponen</th>
+                    <th>Fungsi</th>
+                </tr>
+                <tr>
+                    <td><strong>Logging Transaksi</strong></td>
+                    <td>Mencatat detail siapa mengirim data, kapan, dan file apa</td>
+                </tr>
+                <tr>
+                    <td><strong>Status Looping</strong></td>
+                    <td>Mencatat riwayat perubahan status dan remark selama perbaikan data</td>
+                </tr>
+                <tr>
+                    <td><strong>DCRM Logging</strong></td>
+                    <td>Mencatat hasil cross-check DCRM dan approval untuk disbursement serta hasil Post-Disbursement Verification</td>
+                </tr>
+            </table>
+
+            <h3>E. Dashboard Monitoring</h3>
+            <div class="kpi-container">
+                <div class="kpi-card">
+                    <div class="kpi-label">Status Konversi</div>
+                    <div class="kpi-value">60%</div>
+                    <p>Target konversi debitur</p>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Kualitas Portofolio</div>
+                    <div class="kpi-value">95%</div>
+                    <p>Target kolektibilitas lancar</p>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Kepatuhan Dokumentasi</div>
+                    <div class="kpi-value">30 Hari</div>
+                    <p>Batas waktu kelengkapan dokumen TBO</p>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Performa Mitra</div>
+                    <div class="kpi-value">TAT</div>
+                    <p>Turn Around Time Kopnuspos</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- BAB VI: IDENTIFIKASI RISIKO -->
+        <div class="section">
+            <h2>BAB VI: Identifikasi Risiko Utama</h2>
+            
+            <h3>A. Risiko Operasional</h3>
+            <div class="card">
+                <span class="risk-badge risk-high">HIGH RISK</span>
+                <h4>Risiko Kunci:</h4>
+                <ul>
+                    <li><strong>Debitur Fiktif atau Data Palsu:</strong> Potensi fraud dari model pencairan TBO tanpa verifikasi dokumen fisik di awal</li>
+                    <li><strong>Dokumen Tidak Sesuai Kondisi Riil:</strong> Ketidaksesuaian antara data digital dengan dokumen fisik pasca-pencairan</li>
+                    <li><strong>Gaji Overstated:</strong> Data gaji dilebih-lebihkan berpotensi negative income dan gagal bayar</li>
+                    <li><strong>Delay Dokumen Fisik:</strong> Keterlambatan pengiriman soft file melebihi 30 hari</li>
+                    <li><strong>Manual Process dan Human Error:</strong> Kesalahan dalam input data ke WGSS atau proses manual lainnya</li>
+                </ul>
+            </div>
+
+            <h3>B. Risiko Hukum & Kepatuhan</h3>
+            <div class="card">
+                <span class="risk-badge risk-high">HIGH RISK</span>
+                <h4>Risiko Kunci:</h4>
+                <ul>
+                    <li><strong>Keterbatasan Klausul Buy Back Guarantee:</strong> Kelemahan dalam perjanjian MOU terkait jaminan buy back portofolio bermasalah</li>
+                    <li><strong>Aspek Perlindungan Data Pribadi (PDP):</strong> Risiko pelanggaran regulasi dalam proses data sharing 610 debitur</li>
+                    <li><strong>Dokumentasi Legal yang Tertunda:</strong> Risiko legalitas fasilitas kredit akibat tertundanya kelengkapan dokumen</li>
+                </ul>
+            </div>
+
+            <h3>C. Risiko Kredit</h3>
+            <div class="card">
+                <span class="risk-badge risk-high">HIGH RISK</span>
+                <h4>Risiko Kunci:</h4>
+                <ul>
+                    <li><strong>Gaji Tidak Masuk atau Terlambat:</strong> Gangguan pada sumber pembayaran via PT Pos memicu kegagalan auto-debit</li>
+                    <li><strong>Debitur Meninggal Dunia:</strong> Risiko kredit sebelum klaim asuransi diproses atau kegagalan klaim</li>
+                    <li><strong>Double Financing:</strong> Potensi debitur mengajukan pinjaman di tempat lain setelah disbursement channeling</li>
+                    <li><strong>Kegagalan Klaim Asuransi:</strong> Masalah dokumentasi atau kondisi tertentu yang menggagalkan klaim</li>
+                </ul>
+            </div>
+
+            <h3>D. Risiko Mitra (Third-Party Risk)</h3>
+            <div class="card">
+                <span class="risk-badge risk-medium">MEDIUM RISK</span>
+                <h4>Risiko Kunci:</h4>
+                <ul>
+                    <li><strong>Kinerja Kopnuspos Tidak Sesuai Harapan:</strong> Kegagalan mencapai target konversi atau kualitas servicing</li>
+                    <li><strong>Keterlambatan Penyetoran Angsuran:</strong> Keterlambatan bulk payment (tgl 25) mempengaruhi cash flow BWS</li>
+                    <li><strong>Terminasi Kerjasama Kopnuspos-PT POS:</strong> Terputusnya akses ke sistem payroll PT Pos melumpuhkan mekanisme pembayaran</li>
+                    <li><strong>Kapasitas dan Kapabilitas Operasional Mitra:</strong> Keterbatasan SDM atau sistem dalam menangani 610 debitur</li>
+                </ul>
+            </div>
+
+            <h3>E. Risiko Koordinasi Internal</h3>
+            <div class="card">
+                <span class="risk-badge risk-medium">MEDIUM RISK</span>
+                <h4>Risiko Kunci:</h4>
+                <ul>
+                    <li><strong>Ambiguitas Peran dan Tanggung Jawab:</strong> Kurangnya kejelasan peran antar unit dalam proses 8 tahap</li>
+                    <li><strong>Silo Mentality:</strong> Unit kerja beroperasi terpisah, menghambat flow data dan resolusi masalah</li>
+                    <li><strong>Gap SLA:</strong> Perbedaan Service Level Agreement antar unit menyebabkan bottleneck</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- BAB VII: STRATEGI MITIGASI -->
+        <div class="section">
+            <h2>BAB VII: Strategi Mitigasi dan Control Mechanism</h2>
+            
+            <h3>A. Mitigasi Risiko Operasional</h3>
+            <table>
+                <tr>
+                    <th>Strategi Mitigasi</th>
+                    <th>Mekanisme Kontrol</th>
+                </tr>
+                <tr>
+                    <td><strong>Validasi Multi-Layer</strong></td>
+                    <td>Penerapan validasi data berlapis melalui aplikasi internal BWS untuk meminimalkan human error</td>
+                </tr>
+                <tr>
+                    <td><strong>Verifikasi Data Eksternal</strong></td>
+                    <td>Cross-check data debitur dengan database Taspen untuk verifikasi keabsahan identitas</td>
+                </tr>
+                <tr>
+                    <td><strong>Pre-Disbursement Checklist</strong></td>
+                    <td>Penerapan checklist ketat oleh UB Pilot sebelum input ke core banking</td>
+                </tr>
+                <tr>
+                    <td><strong>Early Warning System</strong></td>
+                    <td>Sistem peringatan dini untuk deteksi anomali data (DSR melebihi batas, rate tidak sesuai)</td>
+                </tr>
+                <tr>
+                    <td><strong>Protokol Stock Opname</strong></td>
+                    <td>Stock opname dokumen fisik berkala di lokasi mitra untuk verifikasi keberadaan dan keaslian</td>
+                </tr>
+            </table>
+
+            <h3>B. Mitigasi Risiko Hukum & Kepatuhan</h3>
+            <table>
+                <tr>
+                    <th>Strategi Mitigasi</th>
+                    <th>Mekanisme Kontrol</th>
+                </tr>
+                <tr>
+                    <td><strong>Legal Review Menyeluruh</strong></td>
+                    <td>Peninjauan ulang komprehensif MOU untuk memperjelas klausul buy back guarantee (hindari wording ambigu)</td>
+                </tr>
+                <tr>
+                    <td><strong>Compliance Checklist</strong></td>
+                    <td>Penerapan checklist kepatuhan regulasi OJK di setiap tahap proses</td>
+                </tr>
+                <tr>
+                    <td><strong>Dokumentasi Lengkap</strong></td>
+                    <td>Memastikan audit trail lengkap termasuk persetujuan data sharing sesuai regulasi PDP</td>
+                </tr>
+                <tr>
+                    <td><strong>SOP Penanganan Sengketa</strong></td>
+                    <td>Penyusunan SOP jelas untuk penanganan sengketa dan klausul eskalasi penyelesaian perselisihan</td>
+                </tr>
+            </table>
+
+            <h3>C. Mitigasi Risiko Kredit</h3>
+            <table>
+                <tr>
+                    <th>Strategi Mitigasi</th>
+                    <th>Mekanisme Kontrol</th>
+                </tr>
+                <tr>
+                    <td><strong>Validasi Kemampuan Bayar Otomatis</strong></td>
+                    <td>Penerapan validasi Net Income untuk memastikan kemampuan bayar sebelum persetujuan</td>
+                </tr>
+                <tr>
+                    <td><strong>Mandatory Buy Back Mechanism</strong></td>
+                    <td>Pengaktifan klausul buy back yang mewajibkan Kopnuspos membeli kembali portofolio bermasalah</td>
+                </tr>
+                <tr>
+                    <td><strong>Credit Scoring & Early Warning Indicator</strong></td>
+                    <td>Pemanfaatan credit scoring dan indikator peringatan dini untuk prediksi potensi gagal bayar</td>
+                </tr>
+                <tr>
+                    <td><strong>Asuransi Kredit</strong></td>
+                    <td>Kewajiban asuransi kredit untuk menanggung risiko meninggal dunia dengan prosedur klaim yang jelas</td>
+                </tr>
+                <tr>
+                    <td><strong>Real-time Monitoring</strong></td>
+                    <td>Pemantauan angsuran masuk secara real-time untuk deteksi keterlambatan pembayaran</td>
+                </tr>
+            </table>
+
+            <h3>D. Mitigasi Risiko Mitra</h3>
+            <table>
+                <tr>
+                    <th>Strategi Mitigasi</th>
+                    <th>Mekanisme Kontrol</th>
+                </tr>
+                <tr>
+                    <td><strong>KPI dan SLA yang Jelas</strong></td>
+                    <td>Penetapan KPI dan SLA terukur untuk Kopnuspos (TAT dan kualitas due diligence)</td>
+                </tr>
+                <tr>
+                    <td><strong>Regular Evaluation & Scorecard</strong></td>
+                    <td>Pelaksanaan evaluasi kinerja mitra berkala menggunakan scorecard terstruktur</td>
+                </tr>
+                <tr>
+                    <td><strong>Contingency Plan</strong></td>
+                    <td>Penyusunan rencana kontingensi jika terjadi terminasi kerjasama Kopnuspos-PT Pos</td>
+                </tr>
+                <tr>
+                    <td><strong>Monitoring Ketepatan Pembayaran</strong></td>
+                    <td>Pemantauan ketepatan waktu penyetoran bulk payment melalui aplikasi internal</td>
+                </tr>
+            </table>
+
+            <h3>E. Penguatan Koordinasi Internal</h3>
+            <table>
+                <tr>
+                    <th>Strategi Mitigasi</th>
+                    <th>Mekanisme Kontrol</th>
+                </tr>
+                <tr>
+                    <td><strong>RACI Matrix</strong></td>
+                    <td>Penerapan RACI Matrix (Responsible, Accountable, Consulted, Informed) untuk kejelasan peran antar unit</td>
+                </tr>
+                <tr>
+                    <td><strong>Communication Plan</strong></td>
+                    <td>Penyusunan rencana komunikasi efektif: daily standup dan weekly steering committee untuk issue resolution</td>
+                </tr>
+                <tr>
+                    <td><strong>Eskalasi Matrix</strong></td>
+                    <td>Penetapan matriks eskalasi jelas untuk penyelesaian masalah di tingkat operasional</td>
+                </tr>
+                <tr>
+                    <td><strong>Project Roadmap & Milestone</strong></td>
+                    <td>Penetapan project roadmap dan milestone yang disepakati bersama untuk alignment tujuan</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- BAB VIII: KPI & EVALUASI -->
+        <div class="section">
+            <h2>BAB VIII: Kriteria Evaluasi & KPI</h2>
+            
+            <h3>A. KPI Bisnis (Business KPI)</h3>
+            <div class="kpi-container">
+                <div class="kpi-card">
+                    <div class="kpi-label">Portfolio Growth</div>
+                    <div class="kpi-value">60%</div>
+                    <p>Minimal konversi dari 610 debitur pilot</p>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Disbursement Target</div>
+                    <div class="kpi-value">Rp 90M</div>
+                    <p>Target pencairan total</p>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Revenue</div>
+                    <div class="kpi-value">Interest</div>
+                    <p>Pendapatan bunga sesuai pricing guideline</p>
+                </div>
+            </div>
+
+            <h3>B. KPI Risiko (Risk KPI)</h3>
+            <div class="kpi-container">
+                <div class="kpi-card">
+                    <div class="kpi-label">NPL Ratio</div>
+                    <div class="kpi-value">&lt; 5%</div>
+                    <p>Maksimal rasio kredit bermasalah</p>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Early Delinquency</div>
+                    <div class="kpi-value">&lt; 5%</div>
+                    <p>Maksimal Kol 1-2 dalam 3 bulan pertama</p>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Fraud Rate</div>
+                    <div class="kpi-value">0</div>
+                    <p>Zero Tolerance untuk fraud</p>
+                </div>
+            </div>
+
+            <h3>C. KPI Operasional (Operational KPI)</h3>
+            <table>
+                <tr>
+                    <th>KPI</th>
+                    <th>Definisi</th>
+                    <th>Target</th>
+                </tr>
+                <tr>
+                    <td><strong>Processing Time (End-to-End)</strong></td>
+                    <td>Waktu dari Proposal Submission hingga Eksekusi Loan</td>
+                    <td>Maksimal 5 hari kerja per batch</td>
+                </tr>
+                <tr>
+                    <td><strong>Accuracy Rate (Data & Dokumen)</strong></td>
+                    <td>Kesesuaian data digital dengan dokumen fisik pada verifikasi 30 hari</td>
+                    <td>Minimal 98% kesesuaian</td>
+                </tr>
+                <tr>
+                    <td><strong>SLA Compliance (Internal)</strong></td>
+                    <td>Kepatuhan SLA antar unit kerja BWS</td>
+                    <td>100% Kepatuhan</td>
+                </tr>
+            </table>
+
+            <h3>D. KPI Mitra (Partner KPI - Kopnuspos)</h3>
+            <table>
+                <tr>
+                    <th>KPI</th>
+                    <th>Definisi</th>
+                    <th>Target</th>
+                </tr>
+                <tr>
+                    <td><strong>Ketepatan Pembayaran (Bulk Payment)</strong></td>
+                    <td>Ketepatan penyetoran bulk payment ke BWS pada tanggal 25</td>
+                    <td>100% Tepat Waktu</td>
+                </tr>
+                <tr>
+                    <td><strong>Response Time (Mismatch Report)</strong></td>
+                    <td>Waktu merespons dan memperbaiki data setelah Mismatch Report</td>
+                    <td>Maksimal 2 hari kerja</td>
+                </tr>
+                <tr>
+                    <td><strong>Quality of Proposal (Reject Rate)</strong></td>
+                    <td>Persentase pengajuan ditolak BWS setelah Proposal Submission</td>
+                    <td>Maksimal &lt; 10% Reject Rate</td>
+                </tr>
+            </table>
+
+            <h3>E. KPI Sistem (System KPI)</h3>
+            <table>
+                <tr>
+                    <th>KPI</th>
+                    <th>Definisi</th>
+                    <th>Target</th>
+                </tr>
+                <tr>
+                    <td><strong>System Uptime (Aplikasi Internal)</strong></td>
+                    <td>Waktu aplikasi internal dapat diakses dan berfungsi normal</td>
+                    <td>Minimal 99.9% Uptime</td>
+                </tr>
+                <tr>
+                    <td><strong>Integration Success Rate</strong></td>
+                    <td>Keberhasilan integrasi data loan ke core banking</td>
+                    <td>100% Integrasi Berhasil</td>
+                </tr>
+                <tr>
+                    <td><strong>Data Accuracy (Post-Disbursement)</strong></td>
+                    <td>Akurasi data portofolio di core banking vs data sumber</td>
+                    <td>100% Akurasi Data</td>
+                </tr>
+            </table>
+
+            <h3>F. Framework Evaluasi</h3>
+            
+            <div class="card">
+                <h4>1. Metodologi Evaluasi</h4>
+                <p><strong>Kuantitatif:</strong> Perbandingan langsung KPI yang dicapai vs target. Perbandingan kinerja portofolio channeling vs portofolio pensiunan BWS eksisting</p>
+                <p><strong>Kualitatif:</strong> Feedback dari stakeholders (UB Pilot, Divisi Risiko, Divisi Operasional). Review kinerja Kopnuspos. Identifikasi bottleneck proses dan potensi risiko</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Fase 1: Evaluasi Operasional Awal (3 Bulan)</h4>
+                    <p><strong>Periode:</strong> 3 bulan pasca disbursement batch pertama</p>
+                    <p><strong>Fokus:</strong> Verifikasi KPI Operasional dan KPI Mitra. Memastikan proses end-to-end berjalan lancar (DCRM 30 hari dan bulk payment)</p>
+                    <p><strong>Keputusan Kritis:</strong> Melanjutkan pilot dengan volume penuh atau melakukan penyesuaian SOP/mitra</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4>Fase 2: Evaluasi Kinerja Penuh (6 Bulan)</h4>
+                    <p><strong>Periode:</strong> 6 bulan pasca disbursement batch pertama</p>
+                    <p><strong>Fokus:</strong> Verifikasi KPI Bisnis dan KPI Risiko. Menilai keberhasilan dalam menyelamatkan portofolio (NPL Ratio) dan potensi scale-up komersial</p>
+                    <p><strong>Keputusan Kritis:</strong> <span class="risk-badge risk-high">GO/NO-GO</span> untuk implementasi model channeling secara permanen dan roll-out ke unit bisnis lain</p>
+                </div>
+            </div>
+
+            <div class="highlight">
+                <h4>3. Kriteria Keputusan (Go/No-Go Decision Criteria)</h4>
+                <p>Keputusan untuk melanjutkan (Go) model channeling akan diambil jika SEMUA kriteria berikut terpenuhi pada akhir Fase 2:</p>
+                <ol>
+                    <li><strong>KPI Risiko:</strong> NPL Ratio &lt; 5% dan Early Delinquency terkendali</li>
+                    <li><strong>KPI Bisnis:</strong> Target konversi minimal 60% debitur tercapai</li>
+                    <li><strong>KPI Mitra:</strong> Tingkat kepatuhan Bulk Payment Kopnuspos minimal 95%</li>
+                    <li><strong>KPI Operasional & Sistem:</strong> Proses dan sistem terbukti stabil, efisien, dan scalable</li>
+                </ol>
+            </div>
+        </div>
+
     </div>
 
     <script>
         function showSection(index) {
             const sections = document.querySelectorAll('.section');
-            const pills = document.querySelectorAll('.nav-pill');
+            const buttons = document.querySelectorAll('nav button');
             
-            sections.forEach(section => section.classList.remove('active'));
-            pills.forEach(pill => pill.classList.remove('active'));
+            sections.forEach((section, i) => {
+                if (i === index) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
+            });
             
-            sections[index].classList.add('active');
-            pills[index].classList.add('active');
+            buttons.forEach((button, i) => {
+                if (i === index) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
